@@ -1,15 +1,20 @@
 <template>
-  <router-link :to='path.details(topics.id)'>
-    <div :class='$style.topicsItem'>
-      <div :class='$style.topicsItemContainer'>
-        <image-lazy :class='$style.userAvatar' :src='topics.author.avatar_url'/>
-        <div :class='$style.topicsItemContainerBody'>
-          <div :class='$style.topicsItemContainerBodyTitle'>{{topics.title}}</div>
-          <div :class='$style.topicsItemContainerBodyAuthor'>
-            {{topics.author.loginname}}
-            <span
-              :class='$style.topicsItemContainerBodyTime'
-            >{{ago(topics.last_reply_at)}}</span>
+  <router-link :to="path.details(topics.id)">
+    <div :class="$style.topicsItem">
+      <div :class="$style.topicsItemContainer">
+        <image-lazy
+          :class="$style.userAvatar"
+          :src="topics.author.avatar_url"
+        />
+        <div :class="$style.topicsItemContainerBody">
+          <div :class="$style.topicsItemContainerBodyTitle">
+            {{ topics.title }}
+          </div>
+          <div :class="$style.topicsItemContainerBodyAuthor">
+            {{ topics.author.loginname }}
+            <span :class="$style.topicsItemContainerBodyTime">{{
+              ago(topics.last_reply_at)
+            }}</span>
           </div>
         </div>
       </div>
@@ -17,7 +22,7 @@
   </router-link>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { RecentInfo } from "@/store/interface/user";
 import { publicMethods } from "@/mixins";
@@ -31,7 +36,7 @@ export default class TopicsItem extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 .topicsItem {
   margin-top: 10px;
   align-items: center;

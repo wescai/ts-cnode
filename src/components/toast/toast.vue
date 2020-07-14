@@ -1,12 +1,12 @@
 <template>
-  <transition name='toast'>
-    <div :class='toast' v-if='show'>
-      <div class='wu-toast-content'>{{message}}</div>
+  <transition name="toast">
+    <div :class="toast" v-if="show">
+      <div class="wu-toast-content">{{ message }}</div>
     </div>
   </transition>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component, Watch } from "vue-property-decorator";
 import Icon from "@/components/icon/index.vue";
 const prefixCls = "wu-toast";
@@ -37,7 +37,7 @@ export default class Toast extends Vue {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .wu-toast {
   position: fixed;
   left: 0;

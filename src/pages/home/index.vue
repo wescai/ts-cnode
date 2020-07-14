@@ -1,43 +1,47 @@
 <template>
-  <div :class='$style.home'>
-    <home-nav-bar @hidden='showTop = false' @show='showTop= true'>
+  <div :class="$style.home">
+    <home-nav-bar @hidden="showTop = false" @show="showTop = true">
       <tab-container
-        :class='$style.content'
-        :style='tabContentStyle'
-        @touchend='handlerTouchend'
-        @touchmove='handlerTouchmove'
-        @touchstart='handlerTouchStart'
-        ref='topicsContent'
+        :class="$style.content"
+        :style="tabContentStyle"
+        @touchend="handlerTouchend"
+        @touchmove="handlerTouchmove"
+        @touchstart="handlerTouchStart"
+        ref="topicsContent"
       >
         <router-link
-          :class='$style.tabContainerItem'
-          :key='key'
-          :to='path.details(topic.id)'
-          v-for='(topic, key) in topics'
+          :class="$style.tabContainerItem"
+          :key="key"
+          :to="path.details(topic.id)"
+          v-for="(topic, key) in topics"
         >
-          <topics-card :topics='topic'/>
+          <topics-card :topics="topic" />
         </router-link>
-        <infinite-loader :loadMore='handlerLoad' :offset='160' useDocument>
-          <Skeleton/>
-          <Skeleton/>
+        <infinite-loader :loadMore="handlerLoad" :offset="160" useDocument>
+          <Skeleton />
+          <Skeleton />
         </infinite-loader>
       </tab-container>
     </home-nav-bar>
-    <transition name='scroll-top'>
-      <div :class='["iconfont","icon-top",$style.iconTop]' @click='scrollToTop' v-show='showTop'></div>
+    <transition name="scroll-top">
+      <div
+        :class="['iconfont', 'icon-top', $style.iconTop]"
+        @click="scrollToTop"
+        v-show="showTop"
+      ></div>
     </transition>
-    <router-link :to='path.publish()'>
-      <div :class='$style.publish'>+</div>
+    <router-link :to="path.publish()">
+      <div :class="$style.publish">+</div>
     </router-link>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component, Watch } from "vue-property-decorator";
 import TabContainer from "@/components/tab-container/index.vue";
 import TabContainerItem from "@/components/tab-container-item/index.vue";
 import TopicsCard from "@/components/topics-card/index.vue";
-import InfiniteLoader from '@/components/InfiniteLoader/index.vue'
+import InfiniteLoader from "@/components/InfiniteLoader/index.vue";
 import HomeNavBar from "./Navbar.vue";
 import Skeleton from "./skeleton.vue";
 import * as type from "@/store/topics/type";
@@ -45,8 +49,8 @@ import { Action, Getter, State } from "vuex-class";
 import { TopicInfo, TabsInfo } from "@/store/interface/topics";
 import { calcClientHeight, docH } from "@/utils";
 import topicTabs from "./config";
-import { LoginInfo } from '@/store/interface/user';
-import { USER__LOGIN } from '@/store/user/type';
+import { LoginInfo } from "@/store/interface/user";
+import { USER__LOGIN } from "@/store/user/type";
 type requestTopics = (data?: { tab?: string; page?: number }) => void;
 
 @Component({
@@ -56,7 +60,7 @@ type requestTopics = (data?: { tab?: string; page?: number }) => void;
     TopicsCard,
     InfiniteLoader,
     Skeleton,
-    HomeNavBar,
+    HomeNavBar
   },
   inject: ["path"]
 })
@@ -73,7 +77,9 @@ export default class Home extends Vue {
   @State(state => state.topics.topicsScroll) scroll!: number;
   @State(state => state.user) user!: LoginInfo;
   @Action(type.TOPICS__CHANGE__TAB) topicsChangeTab!: (tab: string) => void;
-  @Action(type.SET__TOPICS__SCROLL) setTopicsScroll!: (scrollTop: number) => void;
+  @Action(type.SET__TOPICS__SCROLL) setTopicsScroll!: (
+    scrollTop: number
+  ) => void;
   @Action(type.REQUEST__TOPICS) requestTopics!: requestTopics;
   @Action(USER__LOGIN) login!: (accessToken: string) => never;
   mounted() {
@@ -104,11 +110,14 @@ export default class Home extends Vue {
   handlerTouchend() {
     let screenW = window.screen.width / 3;
     let isSlide = Math.abs(this.calcTouch) > screenW;
-    isSlide && this.touchEndX > 0 ? this.touchSwitchTab() : this.resetTouchStatus();
+    isSlide && this.touchEndX > 0
+      ? this.touchSwitchTab()
+      : this.resetTouchStatus();
   }
   touchSwitchTab() {
     let isFirstTab = this.tabIndex === 0 && this.calcTouch > 0;
-    let isLastTab = this.tabIndex === topicTabs.length - 1 && this.calcTouch < 0;
+    let isLastTab =
+      this.tabIndex === topicTabs.length - 1 && this.calcTouch < 0;
 
     if (isFirstTab || isLastTab) {
       return this.resetTouchStatus();
@@ -146,7 +155,7 @@ export default class Home extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .home {
   :global(.scroll-top-enter-active) {

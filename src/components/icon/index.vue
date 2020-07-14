@@ -1,8 +1,8 @@
 <template>
-  <i :class='className' v-on='$listeners'></i>
+  <i :class="className" v-on="$listeners"></i>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 const prefixCls = "iconfont";
 

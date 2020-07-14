@@ -33,7 +33,11 @@ class Toast implements IToast {
     return this.queue[this.queue.length - 1];
   }
   show(data: ToastData | string) {
-    if ((typeof data === 'string' && !data) || (typeof data === 'object' && !data.message)) return;
+    if (
+      (typeof data === "string" && !data) ||
+      (typeof data === "object" && !data.message)
+    )
+      return;
     return this.createToast(data);
   }
   hide(): void {

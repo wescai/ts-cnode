@@ -1,5 +1,5 @@
 export default {
-  path: '/publish',
-  name: 'Publish',
-  component: () => import(/* webpackChunkName : "Publish" */ './index.vue')
-}
+  path: "/publish",
+  name: "Publish",
+  component: () => import(/* webpackChunkName : "Publish" */ "./index.vue")
+};

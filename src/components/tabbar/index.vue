@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component, Prop, Provide } from "vue-property-decorator";
 
 const prefixCls = "wu-tabbar";
@@ -24,7 +24,7 @@ export default class WuTabbar extends Vue {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .wu-tabbar {
   position: fixed;
   display: flex;

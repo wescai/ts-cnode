@@ -1,27 +1,34 @@
 <template>
-  <card :class='$style.topicDetailsReplie'>
-    <div :class='$style.topicDetailsReplieHeader' slot='header'>
-      <image-lazy :class='$style.topicDetailsReplieAvatar' :src='comment.author.avatar_url'/>
-      <span :class='$style.topicDetailsReplieNickname'>
-        <router-link :to='path.user(comment.author.loginname)'>{{comment.author.loginname}}</router-link>
+  <card :class="$style.topicDetailsReplie">
+    <div :class="$style.topicDetailsReplieHeader" slot="header">
+      <image-lazy
+        :class="$style.topicDetailsReplieAvatar"
+        :src="comment.author.avatar_url"
+      />
+      <span :class="$style.topicDetailsReplieNickname">
+        <router-link :to="path.user(comment.author.loginname)">{{
+          comment.author.loginname
+        }}</router-link>
       </span>
-      <span :class='$style.topicDetailsReplieAuthor' v-if='comment.is_author'>作者</span>
-      <span :class='$style.topicDetailsReplieFloor'>
-        <slot></slot>楼
-      </span>
+      <span :class="$style.topicDetailsReplieAuthor" v-if="comment.is_author"
+        >作者</span
+      >
+      <span :class="$style.topicDetailsReplieFloor"> <slot></slot>楼 </span>
     </div>
-    <div slot='body' v-highlight v-html='comment.content'></div>
-    <div :class='$style.topicDetailsReplieFooter' slot='footer'>
-      <span :class='$style.topicDetailsReplieTime'>{{ago(comment.create_at)}}</span>
-      <span :class='$style.topicDetailsReplieUped' v-if='comment.ups.length'>
-        <icon type='like'/>
-        {{comment.ups.length}}
+    <div slot="body" v-highlight v-html="comment.content"></div>
+    <div :class="$style.topicDetailsReplieFooter" slot="footer">
+      <span :class="$style.topicDetailsReplieTime">{{
+        ago(comment.create_at)
+      }}</span>
+      <span :class="$style.topicDetailsReplieUped" v-if="comment.ups.length">
+        <icon type="like" />
+        {{ comment.ups.length }}
       </span>
     </div>
   </card>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import Card from "@/components/card/index.vue";
 import Icon from "@/components/icon/index.vue";
@@ -41,7 +48,7 @@ export default class CommentItem extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 .topicDetailsReplie {
   border-bottom: 11px solid #eee;
   &:nth-last-child(1) {

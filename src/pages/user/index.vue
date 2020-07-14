@@ -1,49 +1,66 @@
 <template>
-  <div :class='$style.user' v-if='userInfo.loginname'>
-    <nav-bar @leftClick='$router.go(-1)' @rightClick='logout'>
-      <icon slot='left' type='back' v-if='!my'></icon>
-      <span :class='$style.userLogout' slot='right' v-if='my'>注销</span>
-      {{ userInfo.loginname}}
+  <div :class="$style.user" v-if="userInfo.loginname">
+    <nav-bar @leftClick="$router.go(-1)" @rightClick="logout">
+      <icon slot="left" type="back" v-if="!my"></icon>
+      <span :class="$style.userLogout" slot="right" v-if="my">注销</span>
+      {{ userInfo.loginname }}
     </nav-bar>
-    <div :class='$style.userContainer'>
-      <div :class='$style.userContainerHeader'>
-        <image-lazy :class='$style.userAvatar' :src='userInfo.avatar_url'/>
-        <div :class='$style.userContainerHeaderInfo'>
-          <div :class='$style.userContainerHeaderNickname'>{{userInfo.loginname}}</div>
-          <div :class='$style.userContainerHeaderScore'>{{userInfo.score}}积分</div>
+    <div :class="$style.userContainer">
+      <div :class="$style.userContainerHeader">
+        <image-lazy :class="$style.userAvatar" :src="userInfo.avatar_url" />
+        <div :class="$style.userContainerHeaderInfo">
+          <div :class="$style.userContainerHeaderNickname">
+            {{ userInfo.loginname }}
+          </div>
+          <div :class="$style.userContainerHeaderScore">
+            {{ userInfo.score }}积分
+          </div>
         </div>
-        <span :class='$style.userContainerHeaderTime'>注册时间{{ago(userInfo.create_at)}}</span>
+        <span :class="$style.userContainerHeaderTime"
+          >注册时间{{ ago(userInfo.create_at) }}</span
+        >
       </div>
-      <tabs :class='$style.tabs' v-model='userTab'>
-        <tabs-item id='replies'>参与的话题</tabs-item>
-        <tabs-item id='topics'>发布的话题</tabs-item>
-        <tabs-item id='collect'>收藏</tabs-item>
+      <tabs :class="$style.tabs" v-model="userTab">
+        <tabs-item id="replies">参与的话题</tabs-item>
+        <tabs-item id="topics">发布的话题</tabs-item>
+        <tabs-item id="collect">收藏</tabs-item>
       </tabs>
-      <tab-container @scroll='handerScroll' ref='content' v-model='userTab'>
-        <tab-container-item :class='$style.userReplies' id='replies'>
-          <topics-item :key='key' :topics='replie' v-for='(replie,key) in userInfo.recent_replies'></topics-item>
-          <div :class='$style.userNoData' v-if='!userInfo.recent_replies.length'>
-            <icon type='no-data'></icon>
+      <tab-container @scroll="handerScroll" ref="content" v-model="userTab">
+        <tab-container-item :class="$style.userReplies" id="replies">
+          <topics-item
+            :key="key"
+            :topics="replie"
+            v-for="(replie, key) in userInfo.recent_replies"
+          ></topics-item>
+          <div
+            :class="$style.userNoData"
+            v-if="!userInfo.recent_replies.length"
+          >
+            <icon type="no-data"></icon>
           </div>
         </tab-container-item>
-        <tab-container-item :class='$style.userTopics' id='topics'>
-          <topics-item :key='key' :topics='topics' v-for='(topics,key) in userInfo.recent_topics'></topics-item>
-          <div :class='$style.userNoData' v-if='!userInfo.recent_topics.length'>
-            <icon type='no-data'></icon>
+        <tab-container-item :class="$style.userTopics" id="topics">
+          <topics-item
+            :key="key"
+            :topics="topics"
+            v-for="(topics, key) in userInfo.recent_topics"
+          ></topics-item>
+          <div :class="$style.userNoData" v-if="!userInfo.recent_topics.length">
+            <icon type="no-data"></icon>
           </div>
         </tab-container-item>
 
-        <tab-container-item id='collect' v-if='userTab === "collect"'>
-          <div :class='$style.userNoData' v-if='!userInfo.collect.length'>
-            <icon type='no-data'></icon>
+        <tab-container-item id="collect" v-if="userTab === 'collect'">
+          <div :class="$style.userNoData" v-if="!userInfo.collect.length">
+            <icon type="no-data"></icon>
           </div>
-          <div :class='$style.userCollect' v-if='userInfo.collect.length'>
+          <div :class="$style.userCollect" v-if="userInfo.collect.length">
             <router-link
-              :key='key'
-              :to='path.details(topic.id)'
-              v-for='(topic,key) in userInfo.collect'
+              :key="key"
+              :to="path.details(topic.id)"
+              v-for="(topic, key) in userInfo.collect"
             >
-              <topics-card :topics='topic'/>
+              <topics-card :topics="topic" />
             </router-link>
           </div>
         </tab-container-item>
@@ -52,7 +69,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { Action, State } from "vuex-class";
 import { publicMethods } from "@/mixins";
@@ -106,7 +123,11 @@ export default class User extends Vue {
     this.$refs.content.$el.style.height = `${this.userContainerHeight()}px`;
   }
   userContainerHeight(): number {
-    let userEles = [".wu-navbar", `${this.getStyle('userContainerHeader')}`, `${this.getStyle("tabs")}`];
+    let userEles = [
+      ".wu-navbar",
+      `${this.getStyle("userContainerHeader")}`,
+      `${this.getStyle("tabs")}`
+    ];
     return docH - calcClientHeight(userEles);
   }
   get userInfo() {
@@ -137,7 +158,7 @@ export default class User extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 .user {
   position: relative;
 }

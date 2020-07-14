@@ -1,10 +1,10 @@
 <template>
-  <div id='app'>
-    <router-view/>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { regEvent } from "@/utils/regEvent";
 

@@ -4,20 +4,18 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { Vue, Prop, Component } from 'vue-property-decorator';
+<script lang="ts">
+import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component
-export default class Setting extends Vue {
-  
-}
+export default class Setting extends Vue {}
 </script>
 
-<style lang='scss' module>
-@import 'style/index';
+<style lang="scss" module>
+@import "style/index";
 .setting {
   margin-top: 40px;
-  color:#eee;
+  color: #eee;
   font-size: 18px;
   text-shadow: 0 0 3px $theme;
 }

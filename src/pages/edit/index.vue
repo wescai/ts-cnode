@@ -1,33 +1,38 @@
 <template>
-  <div :class='$style.edit'>
-    <nav-bar @leftClick='$router.go(-1)' @rightClick='handlerSubmit'>
-      <icon slot='left' type='back'/>新建主题
-      <span slot='right'>发布</span>
+  <div :class="$style.edit">
+    <nav-bar @leftClick="$router.go(-1)" @rightClick="handlerSubmit">
+      <icon slot="left" type="back" />新建主题
+      <span slot="right">发布</span>
     </nav-bar>
-    <div :class='$style.editContainer'>
-      <div :class='$style.editContainerTitle'>
-        <icon type='title'/>
-        <input placeholder='标题' type='text' v-model='title'>
+    <div :class="$style.editContainer">
+      <div :class="$style.editContainerTitle">
+        <icon type="title" />
+        <input placeholder="标题" type="text" v-model="title" />
       </div>
-      <div :class='$style.editContainerContent'>
-        <icon type='content'/>
-        <textarea cols='30' placeholder='请输入内容' rows='5' v-model='content'></textarea>
+      <div :class="$style.editContainerContent">
+        <icon type="content" />
+        <textarea
+          cols="30"
+          placeholder="请输入内容"
+          rows="5"
+          v-model="content"
+        ></textarea>
       </div>
-      <div :class='$style.editContainerTab'>
-        <icon type='classify'/>
-        <span :class='$style.editContainerTabTitle'>选择分类</span>
+      <div :class="$style.editContainerTab">
+        <icon type="classify" />
+        <span :class="$style.editContainerTabTitle">选择分类</span>
       </div>
-      <Labels v-model='tab'>
-        <label-item id='share' label='分享'></label-item>
-        <label-item id='ask' label='问答'></label-item>
-        <label-item id='job' label='招聘'></label-item>
-        <label-item id='dev' label='开发'></label-item>
+      <Labels v-model="tab">
+        <label-item id="share" label="分享"></label-item>
+        <label-item id="ask" label="问答"></label-item>
+        <label-item id="job" label="招聘"></label-item>
+        <label-item id="dev" label="开发"></label-item>
       </Labels>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { State } from "vuex-class";
 import NavBar from "@/components/navbar/index.vue";
@@ -53,7 +58,7 @@ export default class Publish extends Vue {
   @State(state => state.user.accessToken) accesstoken!: string;
   mounted() {
     if (!this.accesstoken) {
-      this.$router.replace({ name: "Login", params: { redirect: "Publish" } })
+      this.$router.replace({ name: "Login", params: { redirect: "Publish" } });
     }
   }
 
@@ -70,15 +75,20 @@ export default class Publish extends Vue {
     if (error.length) {
       return toast.show(error.join());
     }
-    let { success, topic_id } = await createTopic({ title, tab, content, accesstoken });
+    let { success, topic_id } = await createTopic({
+      title,
+      tab,
+      content,
+      accesstoken
+    });
     if (success) {
-      this.$router.push({ path: `/details/${topic_id}` })
+      this.$router.push({ path: `/details/${topic_id}` });
     }
   }
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .edit {
   height: 100vh;

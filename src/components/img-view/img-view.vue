@@ -1,10 +1,10 @@
 <template>
-  <div :class='$style.imgView' @click='show = false' v-if='show'>
-    <img :src='src'>
+  <div :class="$style.imgView" @click="show = false" v-if="show">
+    <img :src="src" />
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component
@@ -19,7 +19,7 @@ export default class ImgView extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .imgView {
   position: fixed;

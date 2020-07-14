@@ -1,15 +1,16 @@
 <template>
-  <img :class='$style.image' :data-src='src' :src='placeholder' ref='img'>
+  <img :class="$style.image" :data-src="src" :src="placeholder" ref="img" />
 </template>
 
-<script lang='ts'>
-import { Vue, Prop, Component } from 'vue-property-decorator';
+<script lang="ts">
+import { Vue, Prop, Component } from "vue-property-decorator";
 let observer: IntersectionObserver | null;
 let observerNum: number = 0;
 
-if (!('IntersectionObserver' in window)) {
-  let script = document.createElement('script');
-  script.src = 'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver';
+if (!("IntersectionObserver" in window)) {
+  let script = document.createElement("script");
+  script.src =
+    "https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver";
   document.body.appendChild(script);
 }
 
@@ -18,7 +19,11 @@ export default class ImageLazy extends Vue {
   @Prop({ default: true }) private lazy!: boolean;
   @Prop() private fallback!: string;
   @Prop() private src!: string;
-  @Prop({ default: "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" }) private placeholder!: string;
+  @Prop({
+    default:
+      "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+  })
+  private placeholder!: string;
   mounted() {
     const $img = this.$refs.img;
     if (!this.lazy) {
@@ -26,7 +31,9 @@ export default class ImageLazy extends Vue {
       return;
     }
     if (!observer) {
-      observer = new IntersectionObserver(this.handerIntersecationObserver, { threshold: 1 });
+      observer = new IntersectionObserver(this.handerIntersecationObserver, {
+        threshold: 1
+      });
     }
     observer.observe($img as HTMLImageElement);
     observerNum++;
@@ -54,7 +61,7 @@ export default class ImageLazy extends Vue {
     try {
       await this.fetchImage(src);
     } catch (error) {
-      console.log("img loading errr  %o", error)
+      console.log("img loading errr  %o", error);
       return;
     }
     img.src = src;
@@ -70,7 +77,7 @@ export default class ImageLazy extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 .image {
   background-color: #eee;
 }

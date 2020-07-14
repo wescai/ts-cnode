@@ -1,26 +1,26 @@
 <template>
-  <div class='wu-navbar'>
-    <div @click='$emit("leftClick")' class='wu-navbar-left'>
-      <slot name='left'></slot>
+  <div class="wu-navbar">
+    <div @click="$emit('leftClick')" class="wu-navbar-left">
+      <slot name="left"></slot>
     </div>
-    <div class='wu-navbar-content'>
+    <div class="wu-navbar-content">
       <slot></slot>
     </div>
-    <div @click='$emit("rightClick")' class='wu-navbar-right'>
-      <slot name='right'></slot>
+    <div @click="$emit('rightClick')" class="wu-navbar-right">
+      <slot name="right"></slot>
     </div>
   </div>
-</template> 
+</template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component, Emit } from "vue-property-decorator";
 const prefixCls = "wu-navbar";
 
 @Component
-export default class NavBar extends Vue { }
+export default class NavBar extends Vue {}
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import "style/index";
 .wu-navbar {
   position: fixed;

@@ -1,13 +1,13 @@
 <template>
   <div
-    :class='[$style.tabsItem,{[$style.selected]:id === $parent.value}]'
-    @click='$parent.$emit("input",id)'
+    :class="[$style.tabsItem, { [$style.selected]: id === $parent.value }]"
+    @click="$parent.$emit('input', id)"
   >
     <slot></slot>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 const prefixCls = "wu-tabs-item";
 
@@ -18,7 +18,7 @@ export default class TabsItem extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .tabsItem {
   flex: 1;

@@ -1,13 +1,13 @@
 <template>
   <div
-    :class='[$style.labelItem,{[$style.selected]:$parent.value === id}]'
-    @click='$parent.$emit("input",id)'
+    :class="[$style.labelItem, { [$style.selected]: $parent.value === id }]"
+    @click="$parent.$emit('input', id)"
   >
-    <span>{{label}}</span>
+    <span>{{ label }}</span>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 @Component
 export default class Label extends Vue {
@@ -16,7 +16,7 @@ export default class Label extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .labelItem {
   display: inline-block;

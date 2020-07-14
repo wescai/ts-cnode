@@ -2,9 +2,9 @@
   <div class="wu-tab-container-item" v-show="id === $parent.value">
     <slot></slot>
   </div>
-</template> 
+</template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component
@@ -14,5 +14,4 @@ export default class TabContainerItem extends Vue {
 }
 </script>
 
-<style lang='scss'>
-</style>
+<style lang="scss"></style>

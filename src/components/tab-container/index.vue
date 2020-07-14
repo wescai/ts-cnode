@@ -1,10 +1,10 @@
 <template>
-  <div class='wu-tab-container' v-on='$listeners'>
+  <div class="wu-tab-container" v-on="$listeners">
     <slot></slot>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component
@@ -14,7 +14,7 @@ export default class TabContainer extends Vue {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .wu-tab-container {
   height: 100%;
   overflow: auto;

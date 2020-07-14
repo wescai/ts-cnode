@@ -1,22 +1,26 @@
 <template>
-  <div :class='$style.login'>
-    <nav-bar @leftClick='$router.go(-1)' @rightClick='handlerNavBarRightClick'>
+  <div :class="$style.login">
+    <nav-bar @leftClick="$router.go(-1)" @rightClick="handlerNavBarRightClick">
       登录
-      <icon slot='right' type='scan'/>
-      <icon slot='left' type='back'/>
+      <icon slot="right" type="scan" />
+      <icon slot="left" type="back" />
     </nav-bar>
-    <div :class='$style.loginContainer'>
-      <div :class='$style.loginInput'>
-        <input placeholder='请输入accessToken' type='text' v-model='accessToken'>
+    <div :class="$style.loginContainer">
+      <div :class="$style.loginInput">
+        <input
+          placeholder="请输入accessToken"
+          type="text"
+          v-model="accessToken"
+        />
       </div>
-      <button :class='$style.loginBtn' @click='handlerLogin'>
+      <button :class="$style.loginBtn" @click="handlerLogin">
         <span>登录</span>
       </button>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import NavBar from "@/components/navbar/index.vue";
 import Icon from "@/components/icon/index.vue";
@@ -32,11 +36,11 @@ import { UserState } from "@/store/interface/user";
     User,
     Icon
   },
-  inject: ['path']
+  inject: ["path"]
 })
 export default class Login extends Vue {
-  private accessToken: string = '';
-  @Prop({ default: '/' }) redirect!: string;
+  private accessToken: string = "";
+  @Prop({ default: "/" }) redirect!: string;
   @Action(USER__LOGIN) userLogin!: (accessToken: string) => never;
   @State(state => state.user) user!: UserState;
   mounted() {
@@ -44,14 +48,20 @@ export default class Login extends Vue {
   }
   handlerLogin() {
     this.login(this.accessToken);
-    this.accessToken = '';
+    this.accessToken = "";
   }
   handlerNavBarRightClick() {
-    console.log("Quicker: Login -> handlerNavBarRightClick -> this.redirect", this.redirect)
-    this.$router.replace({ name: "Qrcode", params: { redirect: this.redirect } });
+    console.log(
+      "Quicker: Login -> handlerNavBarRightClick -> this.redirect",
+      this.redirect
+    );
+    this.$router.replace({
+      name: "Qrcode",
+      params: { redirect: this.redirect }
+    });
   }
   get token() {
-    return this.user.accessToken
+    return this.user.accessToken;
   }
   async login(token: string) {
     if (!token) return toast.show("请输入用户令牌");
@@ -61,7 +71,7 @@ export default class Login extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .login {
   position: relative;

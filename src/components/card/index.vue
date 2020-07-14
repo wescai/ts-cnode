@@ -1,29 +1,29 @@
 <template>
-  <div :class='$style.card'>
-    <div :class='$style.cardContainer'>
-      <div :class='$style.cardHeader'>
-        <slot name='header'></slot>
+  <div :class="$style.card">
+    <div :class="$style.cardContainer">
+      <div :class="$style.cardHeader">
+        <slot name="header"></slot>
       </div>
-      <div :class='bodyCls'>
-        <slot name='body'></slot>
+      <div :class="bodyCls">
+        <slot name="body"></slot>
       </div>
-      <div :class='$style.cardFooter'>
-        <slot name='footer'></slot>
+      <div :class="$style.cardFooter">
+        <slot name="footer"></slot>
       </div>
     </div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 @Component
 export default class Card extends Vue {
   @Prop() bodyBorder!: boolean;
   get bodyCls() {
     return [
-      `${this.getClass('cardBody')}`,
+      `${this.getClass("cardBody")}`,
       {
-        [`${this.getClass('cardBodyBorder')}`]: this.bodyBorder
+        [`${this.getClass("cardBodyBorder")}`]: this.bodyBorder
       }
     ];
   }
@@ -34,7 +34,7 @@ export default class Card extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .card {
   background: #fff;

@@ -10,7 +10,7 @@ import "../style/index.scss";
 import "./common/fastclick";
 import "normalize.css";
 
-Vue.component('image-lazy', ImageLazy);
+Vue.component("image-lazy", ImageLazy);
 //@ts-ignore
 window.FastClick.attach(document.body); // fix click 300ms
 

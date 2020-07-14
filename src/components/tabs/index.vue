@@ -1,10 +1,10 @@
 <template>
-  <div class='tabs'>
+  <div class="tabs">
     <slot></slot>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component
@@ -14,7 +14,7 @@ export default class Tabs extends Vue {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .tabs {
   position: relative;
   display: flex;

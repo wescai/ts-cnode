@@ -1,42 +1,65 @@
 <template>
-  <div :class='$style.topicsDetails' v-if='details.author'>
-    <nav-bar :class='$style.topicsDetailsNavbar' @leftClick='$router.go(-1)'>
-      <Icon slot='left' type='back'/>主题详情
+  <div :class="$style.topicsDetails" v-if="details.author">
+    <nav-bar :class="$style.topicsDetailsNavbar" @leftClick="$router.go(-1)">
+      <Icon slot="left" type="back" />主题详情
     </nav-bar>
-    <div :class='$style.topicsDetailsContainer'>
-      <div :class='$style.topicsDetailsTitle'>{{details.title}}</div>
-      <div :class='$style.topicsDetailsHeader'>
-        <image-lazy :class='$style.topicsDetailsHeaderAvatar' :src='details.author.avatar_url'/>
-        <span :class='$style.topicsDetailsHeaderNickname'>
-          <router-link :to='path.user(details.author.loginname)'>{{details.author.loginname}}</router-link>
+    <div :class="$style.topicsDetailsContainer">
+      <div :class="$style.topicsDetailsTitle">{{ details.title }}</div>
+      <div :class="$style.topicsDetailsHeader">
+        <image-lazy
+          :class="$style.topicsDetailsHeaderAvatar"
+          :src="details.author.avatar_url"
+        />
+        <span :class="$style.topicsDetailsHeaderNickname">
+          <router-link :to="path.user(details.author.loginname)">{{
+            details.author.loginname
+          }}</router-link>
         </span>
-        <span :class='$style.topicsDetailsHeaderText'>{{`发布于${ago(details.create_at)}`}}</span>
+        <span :class="$style.topicsDetailsHeaderText">{{
+          `发布于${ago(details.create_at)}`
+        }}</span>
       </div>
-      <div :class='$style.topicsDetailsBody'>
-        <div :class='$style.topicsDetailsBodyLeft'>
-          <span>阅读数：{{details.visit_count}}</span>
-          <span>回复数：{{details.reply_count}}</span>
+      <div :class="$style.topicsDetailsBody">
+        <div :class="$style.topicsDetailsBodyLeft">
+          <span>阅读数：{{ details.visit_count }}</span>
+          <span>回复数：{{ details.reply_count }}</span>
         </div>
-        <span :class='collectCls' @click='handlerCollect'>{{details.is_collect?'取消收藏':'收藏'}}</span>
+        <span :class="collectCls" @click="handlerCollect">{{
+          details.is_collect ? "取消收藏" : "收藏"
+        }}</span>
       </div>
-      <div :class='$style.topicsDetailsContent' v-highlight v-html='details.content'></div>
-      <div :class='$style.topicsDetailsReplies'>
-        <div v-if='user.accessToken'>
-          <textarea maxlength='150' placeholder='我来说一句' v-model='comment'/>
-          <div :class='$style.topicsDetailsSubmit'>
-            <span @click='handlerSubmit'>评论</span>
+      <div
+        :class="$style.topicsDetailsContent"
+        v-highlight
+        v-html="details.content"
+      ></div>
+      <div :class="$style.topicsDetailsReplies">
+        <div v-if="user.accessToken">
+          <textarea
+            maxlength="150"
+            placeholder="我来说一句"
+            v-model="comment"
+          />
+          <div :class="$style.topicsDetailsSubmit">
+            <span @click="handlerSubmit">评论</span>
           </div>
         </div>
-        <div :class='$style.topicsDetailsNotLogin' v-else>请登录后再来评论</div>
+        <div :class="$style.topicsDetailsNotLogin" v-else>请登录后再来评论</div>
       </div>
-      <comment :comments='replies' v-if='replies.length'/>
-      <div :class='$style.topicsDetailsNotReplies' v-else>还没有评论，快来抢沙发</div>
+      <comment :comments="replies" v-if="replies.length" />
+      <div :class="$style.topicsDetailsNotReplies" v-else>
+        还没有评论，快来抢沙发
+      </div>
     </div>
-    <div @click='handlerScrollToTop' class='iconfont icon-top' v-show='showTop'></div>
+    <div
+      @click="handlerScrollToTop"
+      class="iconfont icon-top"
+      v-show="showTop"
+    ></div>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { Action, State } from "vuex-class";
 import {
@@ -128,8 +151,8 @@ export default class Details extends Vue {
   handlerCollect() {
     this.user.accessToken
       ? this.collect().then(res => {
-        this.changeCollect({ topic: this.topic, result: res });
-      })
+          this.changeCollect({ topic: this.topic, result: res });
+        })
       : toast.show("请登录");
   }
   collect() {
@@ -144,18 +167,18 @@ export default class Details extends Vue {
     let { comment: content, topic: topic_id, getTopicDetails } = this;
     content
       ? API_replies({ content, topic_id }).then(async data => {
-        data.success && toast.show("评论成功");
-        this.comment = "";
-        await getTopicDetails(topic_id);
-        //@ts-ignore
-        this.$refs.details.scrollTop = this.$refs.details.scrollHeight;
-      })
+          data.success && toast.show("评论成功");
+          this.comment = "";
+          await getTopicDetails(topic_id);
+          //@ts-ignore
+          this.$refs.details.scrollTop = this.$refs.details.scrollHeight;
+        })
       : toast.show("评论内容不能为空");
   }
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .topicsDetails {
   font-size: 14px;

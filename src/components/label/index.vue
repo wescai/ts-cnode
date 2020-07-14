@@ -1,10 +1,10 @@
 <template>
-  <div class='label'>
+  <div class="label">
     <slot></slot>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 
 @Component

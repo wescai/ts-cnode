@@ -1,11 +1,13 @@
 <template>
-  <div :class='$style.comment'>
-    <div :class='$style.commentHeader'>共有{{comments.length}}条留言</div>
-    <comments :key='key' :comment='replie' v-for='(replie, key) in comments'>{{key+1}}</comments>
+  <div :class="$style.comment">
+    <div :class="$style.commentHeader">共有{{ comments.length }}条留言</div>
+    <comments :key="key" :comment="replie" v-for="(replie, key) in comments">{{
+      key + 1
+    }}</comments>
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import comments from "./item.vue";
 import { comment } from "@/store/interface/topics";
@@ -19,7 +21,7 @@ export default class Comment extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .comment {
   position: relative;

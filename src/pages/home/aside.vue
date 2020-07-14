@@ -1,86 +1,93 @@
 <template>
-  <div :class='$style.aside'>
+  <div :class="$style.aside">
     <div
-      :class='$style.asideBackground'
-      :style='asideBackground'
-      @click='$parent.showAside = false'
+      :class="$style.asideBackground"
+      :style="asideBackground"
+      @click="$parent.showAside = false"
       @touchmove.prevent
     ></div>
-    <aside :class='$style.asideContent' :style='asideBase' @touchmove.prevent>
-      <div :class='[$style.asideItem]'>
-        <span :class='$style.avatar'>
-          <img :src='avatar'>
+    <aside :class="$style.asideContent" :style="asideBase" @touchmove.prevent>
+      <div :class="[$style.asideItem]">
+        <span :class="$style.avatar">
+          <img :src="avatar" />
         </span>
-        <div :class='$style.userinfo' v-if='isLogin'>
-          <div :class='$style.userinfoTop'>
-            <router-link :class='$style.userinfoNickname' :to='path.user(loginName)'>
-              <span>{{userInfo.loginname}}</span>
+        <div :class="$style.userinfo" v-if="isLogin">
+          <div :class="$style.userinfoTop">
+            <router-link
+              :class="$style.userinfoNickname"
+              :to="path.user(loginName)"
+            >
+              <span>{{ userInfo.loginname }}</span>
             </router-link>
-            <span :class='$style.userinfoScore'>积分{{userInfo.score}}</span>
+            <span :class="$style.userinfoScore">积分{{ userInfo.score }}</span>
           </div>
-          <div :class='$style.userinfoCreateAT'>注册时间{{ago(userInfo.create_at)}}</div>
+          <div :class="$style.userinfoCreateAT">
+            注册时间{{ ago(userInfo.create_at) }}
+          </div>
         </div>
-        <router-link :to='path.login()' v-else>
-          <span :class='$style.login'>登录</span>
+        <router-link :to="path.login()" v-else>
+          <span :class="$style.login">登录</span>
         </router-link>
       </div>
-      <router-link :class='$style.thinnerBorder' :to='path.publish()'>
-        <div :class='[$style.asideItem,$style.itemTop10]'>
-          <icon type='edit'/>
-          <span :class='$style.asideItemText'>发布</span>
-          <icon type='right'/>
+      <router-link :class="$style.thinnerBorder" :to="path.publish()">
+        <div :class="[$style.asideItem, $style.itemTop10]">
+          <icon type="edit" />
+          <span :class="$style.asideItemText">发布</span>
+          <icon type="right" />
         </div>
       </router-link>
-      <router-link :to='path.message()'>
-        <div :class='$style.asideItem'>
-          <icon type='message'/>
-          <span :class='$style.asideItemText'>消息</span>
-          <icon type='right'/>
+      <router-link :to="path.message()">
+        <div :class="$style.asideItem">
+          <icon type="message" />
+          <span :class="$style.asideItemText">消息</span>
+          <icon type="right" />
         </div>
       </router-link>
-      <router-link :class='$style.thinnerBorder' :to='path.setting()'>
-        <div :class='[$style.asideItem,$style.itemTop10]'>
-          <icon type='setting'/>
-          <span :class='$style.asideItemText'>设置</span>
-          <icon type='right'/>
+      <router-link :class="$style.thinnerBorder" :to="path.setting()">
+        <div :class="[$style.asideItem, $style.itemTop10]">
+          <icon type="setting" />
+          <span :class="$style.asideItemText">设置</span>
+          <icon type="right" />
         </div>
       </router-link>
-      <div :class='$style.thinnerBorder'>
-        <div :class='$style.asideItem'>
-          <icon type='moonfill'/>
-          <span :class='$style.asideItemText'>夜间模式</span>
-          <icon type='right'/>
+      <div :class="$style.thinnerBorder">
+        <div :class="$style.asideItem">
+          <icon type="moonfill" />
+          <span :class="$style.asideItemText">夜间模式</span>
+          <icon type="right" />
         </div>
       </div>
-      <router-link :to='path.about()'>
-        <div :class='$style.asideItem'>
-          <icon type='about'/>
-          <span :class='$style.asideItemText'>关于</span>
-          <icon type='right'/>
+      <router-link :to="path.about()">
+        <div :class="$style.asideItem">
+          <icon type="about" />
+          <span :class="$style.asideItemText">关于</span>
+          <icon type="right" />
         </div>
       </router-link>
       <div
-        :class='[$style.asideItem,$style.itemTop10,$style.loginOut]'
-        @click='loginOut'
-        v-if='isLogin'
-      >退出登录</div>
+        :class="[$style.asideItem, $style.itemTop10, $style.loginOut]"
+        @click="loginOut"
+        v-if="isLogin"
+      >
+        退出登录
+      </div>
     </aside>
   </div>
 </template>
 
-<script lang='ts'>
-import { Vue, Prop, Component } from 'vue-property-decorator';
+<script lang="ts">
+import { Vue, Prop, Component } from "vue-property-decorator";
 import { State, Action } from "vuex-class";
 import Icon from "@/components/icon/index.vue";
-import { UserInfo, LoginInfo } from '../../store/interface/user';
-import { publicMethods } from '@/mixins';
-import { USER__LOGOUT, USER__LOGIN } from '../../store/user/type';
+import { UserInfo, LoginInfo } from "../../store/interface/user";
+import { publicMethods } from "@/mixins";
+import { USER__LOGOUT, USER__LOGIN } from "../../store/user/type";
 @Component({
   components: {
     Icon
   },
   mixins: [publicMethods],
-  inject: ['path']
+  inject: ["path"]
 })
 export default class Aside extends Vue {
   @Prop({ default: false }) private show!: boolean;
@@ -89,14 +96,14 @@ export default class Aside extends Vue {
   @Action(USER__LOGOUT) loginOut!: never;
   get asideBase() {
     return {
-      transform: `translateX(${this.transformX}vw)`,
-    }
+      transform: `translateX(${this.transformX}vw)`
+    };
   }
   get asideBackground(): Object {
     return {
       backgroundColor: `rgba(0,0,0,${this.background})`,
       transform: `translateX(${this.transformX}vw)`
-    }
+    };
   }
   get isLogin(): boolean {
     return !!(this.user.accessToken && this.user.loginname);
@@ -119,7 +126,7 @@ export default class Aside extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .aside {
   user-select: none;

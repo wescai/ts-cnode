@@ -1,38 +1,40 @@
 <template>
-  <div class='navbar'>
-    <header :class='$style.header'>
-      <div class='toolBar' ref='toolBar'>
-        <div @click='handlerClickUser'>
-          <span :class='$style.avatarContainer' v-if='isLogin'>
-            <img :class='$style.avatar' :src='avatar'>
+  <div class="navbar">
+    <header :class="$style.header">
+      <div class="toolBar" ref="toolBar">
+        <div @click="handlerClickUser">
+          <span :class="$style.avatarContainer" v-if="isLogin">
+            <img :class="$style.avatar" :src="avatar" />
           </span>
-          <icon :class='$style.iconUser' type='user' v-else/>
+          <icon :class="$style.iconUser" type="user" v-else />
         </div>
-        <span :class='$style.toolBarTitle'>主页</span>
-        <router-link :to='path.message()'>
-          <icon :class='$style.iconMessage' type='message'/>
+        <span :class="$style.toolBarTitle">主页</span>
+        <router-link :to="path.message()">
+          <icon :class="$style.iconMessage" type="message" />
         </router-link>
       </div>
-      <tabs :class='$style.tabs' ref='tabs' v-model='topicsTab'>
-        <tabs-item :id='tab.id' :key='key' v-for='(tab,key) in tabs'>{{tab.value}}</tabs-item>
+      <tabs :class="$style.tabs" ref="tabs" v-model="topicsTab">
+        <tabs-item :id="tab.id" :key="key" v-for="(tab, key) in tabs">{{
+          tab.value
+        }}</tabs-item>
       </tabs>
     </header>
     <slot></slot>
-    <Aside :show='showAside'/>
+    <Aside :show="showAside" />
   </div>
 </template>
 
-<script lang='ts'>
-import { Vue, Prop, Component } from 'vue-property-decorator';
+<script lang="ts">
+import { Vue, Prop, Component } from "vue-property-decorator";
 import { State, Action } from "vuex-class";
 import * as type from "@/store/topics/type";
 import Icon from "@/components/icon/index.vue";
 import Tabs from "@/components/tabs/index.vue";
 import TabsItem from "@/components/tabs-item/index.vue";
-import Aside from './aside.vue';
+import Aside from "./aside.vue";
 import topicTabs from "./config";
-import { TopicInfo } from '@/store/interface/topics';
-import { LoginInfo } from '../../store/interface/user';
+import { TopicInfo } from "@/store/interface/topics";
+import { LoginInfo } from "../../store/interface/user";
 
 let beforeScrollTop = window.pageYOffset;
 @Component({
@@ -42,7 +44,7 @@ let beforeScrollTop = window.pageYOffset;
     Icon,
     Aside
   },
-  inject: ['path']
+  inject: ["path"]
 })
 export default class HomeNavbar extends Vue {
   private page: number = 1;
@@ -61,19 +63,19 @@ export default class HomeNavbar extends Vue {
     let winPageY = window.pageYOffset;
     let diffX = winPageY - beforeScrollTop;
     if (winPageY > 1000) {
-      this.$emit('show');
+      this.$emit("show");
     } else {
-      this.$emit('hidden')
+      this.$emit("hidden");
     }
     if (diffX > 0) {
-      this.setToolBarStyle('transform', 'translateY(-60px)');
+      this.setToolBarStyle("transform", "translateY(-60px)");
     } else {
       if (Math.abs(diffX) > 30) {
-        this.setToolBarStyle('transform', 'translateY(0px)');
+        this.setToolBarStyle("transform", "translateY(0px)");
       }
     }
     if (pageYOffset < 10) {
-      this.setToolBarStyle('transform', 'translateY(0px)');
+      this.setToolBarStyle("transform", "translateY(0px)");
     }
     beforeScrollTop = winPageY;
   }
@@ -105,7 +107,7 @@ export default class HomeNavbar extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 :global(.navbar) {
   margin-top: 85px;

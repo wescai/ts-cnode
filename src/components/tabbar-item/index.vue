@@ -1,5 +1,5 @@
 <template>
-  <div :class="tabbarTabCls" @click="$parent.$emit('input',id)">
+  <div :class="tabbarTabCls" @click="$parent.$emit('input', id)">
     <div class="wu-tabbar-tab-icon">
       <slot name="icon"></slot>
     </div>
@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component, Prop, Provide, Emit } from "vue-property-decorator";
 
 const prefixCls = "wu-tabbar-tab";

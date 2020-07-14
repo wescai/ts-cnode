@@ -1,11 +1,7 @@
 import * as user from "@/store/interface/user";
 import { getUserInfo, getUserCollect, message, login } from "@/api/user";
 import * as type from "./type";
-import {
-  ActionTree,
-  MutationTree,
-  GetterTree
-} from "vuex";
+import { ActionTree, MutationTree, GetterTree } from "vuex";
 import { CHANGE__COLLECT } from "@/store/topics/type";
 import { setLocalStorage, getLocalStorage, removeLocalStorage } from "@/utils";
 import { TopicInfo } from "@/store/interface/topics";
@@ -35,10 +31,9 @@ let actions: ActionTree<user.UserState, any> = {
   async [type.USER__LOGIN]({ commit, dispatch }, accessToken: string) {
     let { success, ...data } = await login(accessToken);
     if (!success) return false;
-    let userInfo = Object.assign({}, data,
-      {
-        accessToken: accessToken
-      })
+    let userInfo = Object.assign({}, data, {
+      accessToken: accessToken
+    });
     dispatch(type.GET__USER__INFO, data.loginname);
     commit(type.USER__LOGIN, userInfo);
     return true;
@@ -101,7 +96,7 @@ let mutations: MutationTree<user.UserState> = {
   }
 };
 let getters: GetterTree<user.UserState, any> = {
-  token: state => state.accessToken,
+  token: state => state.accessToken
 };
 
 /**

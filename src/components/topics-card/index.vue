@@ -1,30 +1,39 @@
 <template>
-  <Card :class='$style.topicsCard' bodyBorder>
-    <div :class='$style.topicsItemHeader' slot='header'>
-      <image-lazy :class='$style.topicsItemAvatar' :src='topics.author.avatar_url'/>
-      <div :class='$style.topicsItemHeaderContainer'>
-        <div :class='$style.topicsItemHeaderContainerNickname'>{{topics.author.loginname}}</div>
-        <div :class='$style.topicsItemHeaderContainerText'>{{topicsHeaderText}}</div>
+  <Card :class="$style.topicsCard" bodyBorder>
+    <div :class="$style.topicsItemHeader" slot="header">
+      <image-lazy
+        :class="$style.topicsItemAvatar"
+        :src="topics.author.avatar_url"
+      />
+      <div :class="$style.topicsItemHeaderContainer">
+        <div :class="$style.topicsItemHeaderContainerNickname">
+          {{ topics.author.loginname }}
+        </div>
+        <div :class="$style.topicsItemHeaderContainerText">
+          {{ topicsHeaderText }}
+        </div>
       </div>
-      <Icon type='hot' v-if='topics.top'/>
-      <Icon type='good' v-if='topics.good'/>
+      <Icon type="hot" v-if="topics.top" />
+      <Icon type="good" v-if="topics.good" />
     </div>
-    <div :class='$style.topicsItemBody' slot='body'>{{topics.title}}</div>
-    <div :class='$style.topicsItemFooter' slot='footer'>
-      <div :class='$style.itemFooterWatch'>
-        <Icon type='chakan'/>
-        {{topics.visit_count}}
+    <div :class="$style.topicsItemBody" slot="body">{{ topics.title }}</div>
+    <div :class="$style.topicsItemFooter" slot="footer">
+      <div :class="$style.itemFooterWatch">
+        <Icon type="chakan" />
+        {{ topics.visit_count }}
       </div>
-      <div :class='$style.itemFooterComment'>
-        <Icon type='comment'/>
-        {{topics.reply_count}}
+      <div :class="$style.itemFooterComment">
+        <Icon type="comment" />
+        {{ topics.reply_count }}
       </div>
-      <div :class='$style.topicsItemFooterTime'>{{ ago(topics.last_reply_at)}}</div>
+      <div :class="$style.topicsItemFooterTime">
+        {{ ago(topics.last_reply_at) }}
+      </div>
     </div>
   </Card>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { TopicInfo } from "@/store/interface/topics";
 import { publicMethods } from "../../mixins";
@@ -51,7 +60,7 @@ export default class TopicsCard extends Vue {
 }
 </script>
 
-<style lang='scss' module>
+<style lang="scss" module>
 @import "style/index";
 .topicsCard {
   margin-bottom: 10px;

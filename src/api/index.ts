@@ -2,7 +2,7 @@ import Axios from "axios";
 import { baseURL } from "./config";
 import { toast } from "@/components/toast/index";
 import Store from "@/store";
-import { USER__LOGOUT } from '@/store/user/type';
+import { USER__LOGOUT } from "@/store/user/type";
 let accesstoken = () => Store.getters.token;
 
 const axios = Axios.create({
@@ -14,7 +14,7 @@ const axios = Axios.create({
 
 axios.interceptors.request.use(
   config => {
-    Store.commit('request', true)
+    Store.commit("request", true);
     let login = !!~config.url!.indexOf("accesstoken");
     let method = config.method;
     if (method === "get" && !config.params && accesstoken()) {
@@ -35,16 +35,16 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    Store.commit('request', false);
+    Store.commit("request", false);
     return response;
   },
   ({ response }) => {
-    Store.commit('request', false);
+    Store.commit("request", false);
     if (response.status === 404) {
-      toast.show('API 未开放');
+      toast.show("API 未开放");
       return;
     }
-    let message = (response.data && response.data.error_msg) || '';
+    let message = (response.data && response.data.error_msg) || "";
     Store.commit(USER__LOGOUT);
     toast.show({ message, duration: 5000 });
   }
